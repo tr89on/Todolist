@@ -31,14 +31,12 @@ function Todo(props) {
       );
   }
   
-  const showEditButton = () => {
-    return !edit ? 'Edit' : 'Save';
-  }
+  const showEditButton = () => {return !edit ? 'Edit' : 'Save'};
 
   return (
     <div className='container'>
       {showContent()}
-      <button className='btn' onClick={() => {setEdit(!edit)}}>{showEditButton()}</button>
+      <button className='btn' onClick={() => setEdit(!edit)}>{showEditButton()}</button>
     </div>
   );
 }
@@ -50,7 +48,7 @@ function App() {
   const [searchVal, setSearchVal] = useState('');
 
   const listItems = (inputList) => inputList.map((item)=>
-    <li class='list-item' key={item.id}>
+    <li className='list-item' key={item.id}>
       <Todo content={item.content}/>
       <div className='container'>
         <div className='container'>
@@ -70,7 +68,7 @@ function App() {
 
   }
 
-  const deleteList = () => setList([])
+  const deleteList = () => setList([]);
 
   function deleteItem(id) {
     console.log(id)
@@ -81,40 +79,42 @@ function App() {
   }
   
   function handleSubmit() {
-    console.log(input)
-    setNumItems(numItems+1);
-    console.log(numItems);
-    list.push(
-      {
-        id: numItems, 
-        content: input,
-      }
-    );
+    if (input !== '') {
+      console.log(input)
+      console.log(numItems);
+      setNumItems(numItems+1);
+      list.push(
+        {
+          id: numItems, 
+          content: input,
+        }
+      );
+    } else {
+      alert("A todo cannot be empty!");
+    }
   }
 
   const showList = () => {
     if (searchVal !== '') {
-      console.log("User has made a search")
       let newList = list.filter(item => item.content.toUpperCase().indexOf(searchVal.toUpperCase()) !== -1)
-
       if (newList.length < 1) {
-        return <li>no todos match your search :((</li>
+        return (<li>no todos match your search :((</li>);
       }
 
-      return listItems(newList)
+      return listItems(newList);
     }
-    return listItems(list)
+    return listItems(list);
   }
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>let's get down to business</h1>
+        <h1>let's get down to business...</h1>
 
-        <input className='searchbar' placeholder="search" onChange={(event)=>{setSearchVal(event.target.value)}} value={searchVal}/>
+        <input className='searchbar' placeholder="search" onChange={(event)=>setSearchVal(event.target.value)} value={searchVal}/>
 
         <button className='btn' onClick={deleteList}>
-          <strong>Delete All Todos</strong>
+          Delete All Todos
         </button>
 
         <div className='taskAdder'>

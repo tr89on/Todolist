@@ -54,7 +54,7 @@ input:focus {
 }
 
 .searchbar {
-  width: 50%;
+  width: 300px;
 }
 
 .todoItem {
