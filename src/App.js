@@ -4,20 +4,6 @@ import React, {useEffect, useState} from 'react';
 import Todo from './Todo.js';
 import useKeyboardEvent from './useKeyboardEvent.js';
 
-// function useKeyboardEvent(key, callback) {
-//   useEffect(() => {
-//     const handler = function(event) {
-//       if (event.key === key && document.activeElement.id === 'input') {
-//         callback()
-//       }
-//     }
-//     window.addEventListener('keydown', handler)
-//     return () => {
-//       window.removeEventListener('keydown', handler)
-//     }
-//   }, [key, callback])
-// }
-
 function App() {
   const [numItems, setNumItems] = useState(0);
   const [list,setList] = useState([]);
