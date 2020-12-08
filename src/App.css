@@ -54,6 +54,7 @@ input:focus {
 }
 
 .searchbar {
+  max-width: 90%;
   width: 300px;
 }
 
@@ -63,17 +64,11 @@ input:focus {
 
 .container {
   display: flex;
+  flex-flow: row wrap;
   justify-content: space-between;
 
   padding: 5px;
   margin: 5px;
-}
-
-.list-item {
-  border: 2px solid white;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 10px;
 }
 
 .taskAdder {
@@ -84,10 +79,21 @@ input:focus {
   border: 2px solid white;
   padding: 10px;
 
+  max-width: 95%;
+  width: 300px;
+
   margin: 5px;
 }
 
+.list-item {
+  border: 2px solid white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
 #todo-list {
+  max-width: 95%;
   width: 500px;
   list-style: none;
 }
