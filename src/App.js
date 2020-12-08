@@ -34,6 +34,20 @@ function Todo(props) {
   );
 }
 
+function useKeyboardEvent(key, callback) {
+  useEffect(() => {
+    const handler = function(event) {
+      if (event.key === key && document.activeElement.id === 'input') {
+        callback()
+      }
+    }
+    window.addEventListener('keydown', handler)
+    return () => {
+      window.removeEventListener('keydown', handler)
+    }
+  }, [key, callback])
+}
+
 function App() {
   const [numItems, setNumItems] = useState(0);
   const [list,setList] = useState([]);
@@ -53,17 +67,9 @@ function App() {
     </li>
   );
 
-  function moveUp(id) {  
-    
-  }
-
-  function moveDown(id) {
-
-  }
-
   const deleteList = () => setList([]);
 
-  function deleteItem(id) {
+  const deleteItem = (id) => {
     console.log(id)
     let newList = list.filter((item) => item.id !== id)
 
@@ -71,32 +77,33 @@ function App() {
     setList(newList)
   }
   
-  function handleSubmit() {
+  const handleSubmit = () => {
+    let newList = list;
+    let newNum = numItems;
     if (input !== '') {
-      console.log(input)
-      console.log(numItems);
-      setNumItems(numItems+1);
-      list.push(
-        {
-          id: numItems, 
-          content: input,
-        }
-      );
+      newNum++;
+      newList.push({
+        id: numItems, 
+        content: input,
+      });
     } else {
       alert("A todo cannot be empty!");
     }
+    setNumItems(newNum);
+    setList(newList);
   }
 
+  useKeyboardEvent('Enter', handleSubmit);
+
   const showList = () => {
+    let newList = list;
     if (searchVal !== '') {
-      let newList = list.filter(item => item.content.toUpperCase().indexOf(searchVal.toUpperCase()) !== -1)
+      newList = list.filter(item => item.content.toUpperCase().indexOf(searchVal.toUpperCase()) !== -1)
       if (newList.length < 1) {
         return (<li>no todos match your search :((</li>);
       }
-
-      return listItems(newList);
     }
-    return listItems(list);
+    return listItems(newList);
   }
 
   return (
@@ -112,8 +119,8 @@ function App() {
 
         <div className='taskAdder'>
           Add new todo:
-          <input placeholder="type here"  value={input} onChange={(event)=>{setInput(event.target.value)}}/>
-          <input className='btn' onClick={handleSubmit} type="submit" value="Submit" />
+          <input id='input' placeholder="type here" value={input} onChange={(event)=>{setInput(event.target.value)}}/>
+          <input className='btn' onClick={handleSubmit} type="submit" value="Submit (or press ENTER)" />
         </div>
 
         <ul id='todo-list'>{showList()}</ul>
