@@ -1,52 +1,22 @@
 import './App.css';
 
 import React, {useEffect, useState} from 'react';
+import Todo from './Todo.js';
+import useKeyboardEvent from './useKeyboardEvent.js';
 
-function Todo(props) {
-  const [content, setContent] = useState(props.content);
-  const [done, setDone] = useState(false);
-  const [edit, setEdit] = useState(false);
-
-  // const [bold, setBold] = useState(false);
-  // const [italic, setItalic] = useState(false);
-  // const [underlined, setUnderlined] = useState(false);
-
-  const showContent = () => {
-    if (edit) {
-      return (<input value={content} onChange={(event) => setContent(event.target.value)}/>);
-    }
-    return (
-      <span
-        className='todoItem' 
-        onClick={() => {setDone(!done)}}
-        style={{textDecoration: done ? 'line-through' : 'none' }}>{content}
-      </span>
-      );
-  }
-  
-  const showEditButton = () => {return !edit ? 'Edit' : 'Save'};
-
-  return (
-    <div className='container'>
-      {showContent()}
-      <button className='btn' onClick={() => setEdit(!edit)}>{showEditButton()}</button>
-    </div>
-  );
-}
-
-function useKeyboardEvent(key, callback) {
-  useEffect(() => {
-    const handler = function(event) {
-      if (event.key === key && document.activeElement.id === 'input') {
-        callback()
-      }
-    }
-    window.addEventListener('keydown', handler)
-    return () => {
-      window.removeEventListener('keydown', handler)
-    }
-  }, [key, callback])
-}
+// function useKeyboardEvent(key, callback) {
+//   useEffect(() => {
+//     const handler = function(event) {
+//       if (event.key === key && document.activeElement.id === 'input') {
+//         callback()
+//       }
+//     }
+//     window.addEventListener('keydown', handler)
+//     return () => {
+//       window.removeEventListener('keydown', handler)
+//     }
+//   }, [key, callback])
+// }
 
 function App() {
   const [numItems, setNumItems] = useState(0);
@@ -56,7 +26,7 @@ function App() {
 
   const listItems = (inputList) => inputList.map((item)=>
     <li className='list-item' key={item.id}>
-      <Todo content={item.content}/>
+      <Todo content={item.content} id={item.id}/>
       <div className='container'>
         {/* <div className='container'>
           <button className='btn' onClick={() => moveUp(item.id)}> ^ </button>
@@ -83,7 +53,7 @@ function App() {
     if (input !== '') {
       newNum++;
       newList.push({
-        id: numItems, 
+        id: 'task-#' + numItems, 
         content: input,
       });
     } else {
@@ -93,7 +63,7 @@ function App() {
     setList(newList);
   }
 
-  useKeyboardEvent('Enter', handleSubmit);
+  useKeyboardEvent('Enter', handleSubmit, 'input');
 
   const showList = () => {
     let newList = list;
