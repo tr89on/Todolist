@@ -1,6 +1,6 @@
 import './App.css';
 
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Todo from './Todo.js';
 import useKeyboardEvent from './useKeyboardEvent.js';
 
