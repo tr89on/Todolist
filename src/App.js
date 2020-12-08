@@ -2,21 +2,14 @@ import './App.css';
 
 import React, {useState} from 'react';
 
-function Button(props) {
-  return (
-    <div>
-      <button onClick={props.addFunc}>{props.text}</button>
-    </div>
-  )
-}
 function Todo(props) {
   const [content, setContent] = useState(props.content);
   const [done, setDone] = useState(false);
   const [edit, setEdit] = useState(false);
 
-  const [bold, setBold] = useState(false);
-  const [italic, setItalic] = useState(false);
-  const [underlined, setUnderlined] = useState(false);
+  // const [bold, setBold] = useState(false);
+  // const [italic, setItalic] = useState(false);
+  // const [underlined, setUnderlined] = useState(false);
 
   const showContent = () => {
     if (edit) {
