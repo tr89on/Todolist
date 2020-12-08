@@ -1,6 +1,6 @@
 import './App.css';
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 function Todo(props) {
   const [content, setContent] = useState(props.content);
@@ -44,10 +44,10 @@ function App() {
     <li className='list-item' key={item.id}>
       <Todo content={item.content}/>
       <div className='container'>
-        <div className='container'>
+        {/* <div className='container'>
           <button className='btn' onClick={() => moveUp(item.id)}> ^ </button>
           <button className='btn' onClick={() => moveDown(item.id)}> v </button>
-        </div>
+        </div> */}
         <button className='btn' onClick={() => deleteItem(item.id)}> delete </button>
       </div>
     </li>
@@ -112,7 +112,7 @@ function App() {
 
         <div className='taskAdder'>
           Add new todo:
-          <input placeholder="type here" onChange={(event)=>{setInput(event.target.value)}} value={input}/>
+          <input placeholder="type here"  value={input} onChange={(event)=>{setInput(event.target.value)}}/>
           <input className='btn' onClick={handleSubmit} type="submit" value="Submit" />
         </div>
 
