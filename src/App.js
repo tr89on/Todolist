@@ -47,6 +47,7 @@ function App() {
     }
     setNumItems(newNum);
     setList(newList);
+    setInput('');
   }
 
   useKeyboardEvent('Enter', handleSubmit, 'input');
@@ -75,7 +76,7 @@ function App() {
 
         <div className='taskAdder'>
           Add new todo:
-          <input id='input' placeholder="type here" value={input} onChange={(event)=>{setInput(event.target.value)}}/>
+          <input id='input' placeholder="(ex: to defeat the huns)" value={input} onChange={(event)=>{setInput(event.target.value)}}/>
           <input className='btn' onClick={handleSubmit} type="submit" value="Submit (or press ENTER)" />
         </div>
 
