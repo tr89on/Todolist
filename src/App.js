@@ -10,6 +10,8 @@ function App() {
   const [input,setInput] = useState('');
   const [searchVal, setSearchVal] = useState('');
 
+  // const [date, setDate] = useState(new Date());
+
   const listItems = (inputList) => inputList.map((item)=>
     <li className='list-item' key={item.id}>
       <Todo content={item.content} id={item.id}/>
@@ -76,7 +78,8 @@ function App() {
 
         <div className='taskAdder'>
           Add new todo:
-          <input id='input' placeholder="(ex: to defeat the huns)" value={input} onChange={(event)=>{setInput(event.target.value)}}/>
+          {/* <input type="date" value={date} onChange={(event)=>setDate(event.target.value)} /> */}
+          <input id='input' placeholder="(ex: defeat the huns)" value={input} onChange={(event)=>{setInput(event.target.value)}}/>
           <input className='btn' onClick={handleSubmit} type="submit" value="Submit (or press ENTER)" />
         </div>
 
